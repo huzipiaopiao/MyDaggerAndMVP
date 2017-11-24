@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:orientation="vertical"
+    android:paddingBottom="2dp"
+    android:paddingTop="2dp">
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
+
+    <TextView
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:padding="5dp"
+        android:background="@drawable/bg_circle"
+        android:id="@+id/tv1"
+        android:text="标题"
+        android:textStyle="bold"
+        style="@style/My_Text_Style" />
+
+
+    <TextView
+        android:padding="5dp"
+        android:background="@drawable/bg_circle2"
+        style="@style/My_Text_Style"
+        android:id="@+id/tv2"
+        android:textSize="12sp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:text="来源"
+        />
+
+</RelativeLayout>
