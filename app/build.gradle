@@ -46,7 +46,7 @@ dependencies {
     compile 'com.android.support:design:26.0.0-alpha1'
 
     compile 'com.github.bumptech.glide:glide:3.8.0'
-    //一个基于ijkplayer封装的视频播放库：https://github.com/tcking/GiraffePlayer2
+        //一个基于ijkplayer封装的视频播放库：https://github.com/tcking/GiraffePlayer2
     compile 'com.github.tcking:giraffeplayer2:0.1.11'
     compile 'com.github.tcking:ijkplayer-x86:0.8.4' //support x86
 

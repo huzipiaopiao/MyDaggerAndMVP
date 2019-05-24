@@ -41,7 +41,6 @@ public class SecondeActivity extends AppCompatActivity implements SecondeActivit
     Utils utils;
 
 
-    private RecyclerView rv;
     private SwipeRefreshLayout srl;
     List<Baisibudejie.ShowapiResBodyBean.PagebeanBean.ContentlistBean> contentlist = new ArrayList<>();
     private SecondAdapter secondAdapter;
@@ -60,7 +59,7 @@ public class SecondeActivity extends AppCompatActivity implements SecondeActivit
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
         setupActivityComponent();
-        rv = (RecyclerView) findViewById(R.id.rv);
+        RecyclerView rv = (RecyclerView) findViewById(R.id.rv);
         srl = (SwipeRefreshLayout) findViewById(R.id.srl);
         video_view = (VideoView) findViewById(R.id.video_view);
         //设置刷新时动画的颜色，可以设置4个
@@ -119,6 +118,8 @@ public class SecondeActivity extends AppCompatActivity implements SecondeActivit
         }
         String video_uri = contentlistBean.getVideo_uri();
         if (TextUtils.isEmpty(video_uri)) {
+            video_view.getPlayer().stop();
+            video_view.setVisibility(View.GONE);
             String url = contentlistBean.getWeixin_url();
             Uri uri = Uri.parse(url);
             Intent it = new Intent(Intent.ACTION_VIEW, uri);
@@ -127,14 +128,20 @@ public class SecondeActivity extends AppCompatActivity implements SecondeActivit
             if (utils.getNetworkType() != 1) {
                 utils.showToast("当前非wifi网络环境下，注意流量使用!!!", true);
             }
+            if (video_view.getVideoInfo().getUri() != null && video_view.getPlayer().isPlaying()) {
+                video_view.getPlayer().release();
+            }
             video_view.setVisibility(View.VISIBLE);
             video_view.setVideoPath(video_uri).getPlayer().start();
+//            video_view.setVideoPath("http://58.250.165.228:6999/ssdtSMP/appAudio/SexMachine.mp3").getPlayer().start();
+//            video_view.setVideoPath("http://58.250.165.228:6999/ssdtSMP/appAudio/WhatTheyDo.mp3 ").getPlayer().start();
+//            video_view.setVideoPath("http://58.250.165.228:6888/ssdtSMP/appVideo/xxxxx.mp4").getPlayer().start();
         }
     }
 
     @Override
     protected void onDestroy() {
-        sharedPreferences.edit().putInt(SECOND_PAGE, page).commit();
+        sharedPreferences.edit().putInt(SECOND_PAGE, page).apply();
         super.onDestroy();
     }
 
